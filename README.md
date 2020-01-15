@@ -5,7 +5,7 @@
 ```js
   //api文件中开启mock
   {
-    soundWaveSensorList: '/mockApi/zy-feature/wapi/v1/device/sublist', //查询变电站下的传感器
+    soundWaveSensorList: '/mockApi/xx', 
   }
   // webpackDevServer中的设置proxy
   '/mockApi': {
@@ -18,7 +18,7 @@
 * 在mock的config的urlMap中增加请求url的映射
 
 ```js
-  deviceSubList: '/zy-feature/wapi/v1/device/sublist',
+  getMenuList: '/getMenuList',
 ```
 
-* 在mock的route文件夹中创建对于的mock文件，文件名要与 urlMap中的key值相同如 deviceSubList.js
+* 在mock的route文件夹中创建对于的mock文件，文件名要与 urlMap中的key值相同如 getMenuList.js
