@@ -19,7 +19,7 @@ class MenuUtils {
     queryMenus = async (tableName: string, selectCondition: string, selectParams?: string) => {
         const queryStr = querySQLCreator(tableName, selectCondition, selectParams);
         // console.log('queryStr: ', queryStr);
-        const { res } = await SQL.querySQL(queryStr)
+        const { res }: any = await SQL.connectSql(queryStr)
         // console.log('res: ', res);
         if (res.length) {
             this._menu.adminMenus = this.formatTreeMenus(res);
@@ -27,9 +27,9 @@ class MenuUtils {
         }
         const updateAdmin = updateSQLCreator('p_roles', `menus='${JSON.stringify(res)}' where role=0 `);
         const updateNormalUsers = updateSQLCreator('p_roles', `menus='${JSON.stringify(this._menu.normalUsersMenus)}' where role=1 `);
-        const updateAdminRes = await SQL.querySQL(updateAdmin);
+        const updateAdminRes = await SQL.connectSql(updateAdmin);
         // console.log('updateAdminRes: ', updateAdminRes);
-        const updateNormalUsersRes = await SQL.querySQL(updateNormalUsers);
+        const updateNormalUsersRes = await SQL.connectSql(updateNormalUsers);
         // console.log('updateNormalUsersRes: ', updateNormalUsersRes);
 
     }

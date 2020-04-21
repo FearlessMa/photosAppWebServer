@@ -7,7 +7,7 @@
  * @param {string} [selectParams='*'] 查询属性
  * @returns sql语句
  */
-const querySQLCreator = (tableName: string, selectCondition: string, selectParams: string = '*'): string => {
+const querySQLCreator = (tableName: string, selectCondition: string = "", selectParams: string = '*'): string => {
   return `select ${selectParams} from ${tableName} ${selectCondition}`
 }
 /**
@@ -19,7 +19,7 @@ const querySQLCreator = (tableName: string, selectCondition: string, selectParam
  * @returns 插入语句
  */
 const insertSQLCreator = (tableName: string, insertKey: string, insertValues: string): string => {
-  return `insert into ${tableName} (${insertKey}) values (${insertValues})`
+  return `insert into ${tableName} (${insertKey}) values ${insertValues};`
 }
 /**
  * 删除数据

@@ -1,5 +1,11 @@
-// const Koa = require('koa');
-const mysql = require('mysql');
+
+import * as mysql from 'mysql';
+import {
+  querySQLCreator,
+  insertSQLCreator,
+  deleteSQLCreator,
+  updateSQLCreator
+} from './sqlUtils';
 
 const pool = mysql.createPool({
   host: '127.0.0.1',
@@ -14,7 +20,7 @@ const pool = mysql.createPool({
  * @param {*} sqlStr sql语句
  * @returns promise
  */
-const query = (sqlStr) => {
+const connectSql: ConnectSql = (sqlStr) => {
   // console.log('sqlStr: ', sqlStr);
   return new Promise((resolve, reject) => {
     pool.getConnection((err, connection) => {
@@ -24,8 +30,8 @@ const query = (sqlStr) => {
       }
       connection.query(sqlStr, (err, res, fileds) => {
         // console.log('fileds: ', fileds);
-        // console.log('res: ', res);
-        
+        // console.log('res: connectSql', res);
+
         if (err) {
           console.log('err: ', err);
           reject(err);
@@ -43,6 +49,17 @@ const query = (sqlStr) => {
 //   console.log('res: ', res);
 // }
 // test()
-module.exports = {
-  querySQL: query
+
+interface Connect {
+  connectSql: (sqlStr: string) => Promise<{ res: any }>
+}
+type ConnectSql = (sqlStr: string) => Promise<{ res: any }>
+export {
+  connectSql,
+  querySQLCreator,
+  insertSQLCreator,
+  deleteSQLCreator,
+  updateSQLCreator
+  // querySQL: query,
+  // connectSql: query
 }

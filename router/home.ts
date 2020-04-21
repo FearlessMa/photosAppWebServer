@@ -9,5 +9,6 @@ const fn = async (ctx: Koa.Context, next) => {
   await next();
 }
 home.get('/', fn as any);
+home.post('/', fn as any);
 
 export default home;

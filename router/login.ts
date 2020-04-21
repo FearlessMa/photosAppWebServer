@@ -39,7 +39,7 @@ page.post('/', async (ctx: any, next: any) => {
     //     isLogin = true;
     //   }
     // })
-    isLogin = sessionIncludesData(session.data, uid, sessionKey,userName);
+    isLogin = sessionIncludesData(session.data, uid, sessionKey, userName);
     console.log('isLogin: ', isLogin);
   }
   if (isLogin) {
@@ -48,14 +48,15 @@ page.post('/', async (ctx: any, next: any) => {
     if (!userName || !password) {
       ctx.body = errData;
     } else {
-      const sqlUser = querySQLCreator('p_user', `where username = '${userName}' and password='${password}'`)
-      const { res } = await SQl.querySQL(sqlUser)
-      // console.log('res:111 ', res);
+      const sqlUser = querySQLCreator('p_user', `where username='${userName}' and password='${password}';`)
+      console.log('sqlUser: ', sqlUser);
+      const { res } = await SQl.connectSql(sqlUser)
+      console.log('res:111 querySQLCreator', res);
       if (res.length && res[0].id) {
         const userRole = res[0].role;
         const uid = res[0].id;
         // const sqlRole = `select * from p_roles where role = '${userRole}'`;
-        // const roleRes = await SQl.querySQL(sqlRole);
+        // const roleRes = await SQl.connectSql(sqlRole);
         // console.log('roleRes: ', roleRes);
         // data.sqlRes = { user: res, roles: roleRes };
         // data.data.menu = JSON.parse(roleRes.res[0].menus);

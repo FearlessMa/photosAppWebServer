@@ -5,7 +5,7 @@ interface INext {
 }
 
 function log(ctx: Koa.Context): void {
-  // console.log('ctx: ', ctx.request.body);
+  // console.log('ctx:log ', ctx.request.body);
   // // console.log('URL: ', ctx.URL);
   // console.log('href: ', ctx.href);
   // console.log('url: ', ctx.url);

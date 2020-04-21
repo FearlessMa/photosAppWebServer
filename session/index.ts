@@ -1,13 +1,13 @@
 import { SessionStore } from './store';
-import { querySQL } from '../sql';
+import * as sql from '../sql/index';
 import { querySQLCreator, insertSQLCreator, deleteSQLCreator } from '../sql/sqlUtils';
-
-const sStore = new SessionStore({ connect: querySQL, query: '', insert: '', deleteStr: '' });
+const { connectSql } = sql;
+const sStore = new SessionStore({ connect: connectSql, query: '', insert: '', deleteStr: '' });
 export const keys = ['abcdef'];          // 作为cookies签名时的秘钥
 
 export const config = {
   key: 'sid',                        // cookie的键名
-  maxAge: 60000*30,                       // 过期时间
+  maxAge: 60000 * 30,                       // 过期时间
   overwrite: false,                        // 是否覆盖cookie
   httpOnly: false,                         // 是否JS无法获取cookie
   signed: false,                           // 是否生成cookie的签名，防止浏览器暴力篡改

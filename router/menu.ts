@@ -41,13 +41,13 @@ page.get('/', async (ctx: any, next: any) => {
   }
   const session = ctx.session;
   console.log('session:menu ', session);
-  const sessionKey = ctx.cookies.get('sid');
-  const uid = ctx.cookies.get('uid');
-  const equals = sessionIncludesData(session.data, uid, sessionKey);
-  if (equals) {
+  // const sessionKey = ctx.cookies.get('sid');
+  // const uid = ctx.cookies.get('uid');
+  // const equals = sessionIncludesData(session.data, uid, sessionKey);
+  // if (equals) {
     const role = JSON.parse(session.data[0].sessionValue).userRole;
     data.data = menuInit.menuUtils._menu[roleMenu[role]]
-  }
+  // }
   ctx.body = data;
   await next();
 })
